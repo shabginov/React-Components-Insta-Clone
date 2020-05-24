@@ -11,6 +11,17 @@ const Post = props => {
   // set up state for the likes
   // console.log(props);
   const [likes, setLikes] = useState(props.post.likes);
+  const [liked, setLiked] = useState(false);
+
+  const updateLike = () => {
+    if (liked) {
+      setLikes(likes - 1);
+      setLiked(false);
+    } else {
+      setLikes(likes + 1);
+      setLiked(true);
+    }
+  }
 
   return (
     <div className="post-border">
@@ -27,7 +38,7 @@ const Post = props => {
           src={props.post.imageUrl}
         />
       </div>
-      <LikeSection likes={likes} updateLikes={setLikes}/>
+      <LikeSection likes={likes} updateLikes={updateLike}/>
       <CommentSection
         postId={props.post.imageUrl}
         comments={props.post.comments}
